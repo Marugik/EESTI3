@@ -7,9 +7,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             margin: 0 auto;
-            max-width: 600px;
+            max-width: 800px;
+            text-align: center;
         }
         .question {
             margin: 20px;
@@ -33,10 +33,25 @@
             color: green;
             font-weight: bold;
         }
+        .grammar-selector {
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
     <h1>Викторина: Случайные слова</h1>
+
+    <!-- Селектор выбора грамматики -->
+    <div class="grammar-selector">
+        <label for="grammar">Выберите грамматику:</label>
+        <select id="grammar" onchange="displayGrammarLink()">
+            <option value="">Выберите грамматику</option>
+            <option value="noun">Существительное</option>
+            <option value="verb">Повелительное наклонение</option>
+            <option value="adjective">Прошедшее время</option>
+        </select>
+        <a id="grammarLink" href="#" target="_blank" style="display: none; margin-top: 10px;">Перейти к грамматике</a>
+    </div>
 
     <!-- Селектор выбора языка -->
     <div class="language-selector">
@@ -187,7 +202,7 @@
             ["plaast/er, -ri, -rit" , "пластырь"]
         ];
 
-        let languageDirection = "etToRu"; // Направление: с эстонского на русский по умолчанию
+     let languageDirection = "etToRu"; // Направление: с эстонского на русский по умолчанию
         let currentQuestion = null;
         let correctAnswer = "";
 
@@ -238,9 +253,32 @@
             }
         }
 
+        function displayGrammarLink() {
+            const grammar = document.getElementById('grammar').value;
+            const grammarLink = document.getElementById('grammarLink');
+            switch (grammar) {
+                case 'noun':
+                    grammarLink.href = 'https://example.com/noun';
+                    break;
+                case 'verb':
+                    grammarLink.href = 'https://example.com/verb';
+                    break;
+                case 'adjective':
+                    grammarLink.href = 'https://example.com/adjective';
+                    break;
+                default:
+                    grammarLink.href = '#';
+                    break;
+            }
+            grammarLink.style.display = grammar ? 'block' : 'none';
+        }
+
+        function resetQuiz() {
+            displayQuestion();
+        }
+
         // Начальная инициализация
         displayQuestion();
     </script>
 </body>
-<img src="dragon.png" alt="Дракон" style="width: 100%; max-width: 600px; margin-top: 20px;">
 </html>
