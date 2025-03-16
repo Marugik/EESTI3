@@ -62,6 +62,15 @@
         </select>
     </div>
 
+    <!-- Селектор выбора списка слов -->
+    <div class="word-list-selector">
+        <label for="wordList">Выберите список слов:</label>
+        <select id="wordList" onchange="displayQuestion()">
+            <option value="all">Все слова</option>
+            <option value="toLearn">Слова для изучения</option>
+        </select>
+    </div>
+
     <div class="question-container">
         <div id="question" class="question"></div>
         <div id="options" class="options"></div>
@@ -2263,27 +2272,212 @@
             ["plaast/er, -ri, -rit" , "пластырь"]
        
         ];
+ const wordsToLearn = [
+            ["seen, -e, -", "гриб"],
+    ["seenel käima, seenel käia, käin seenel", "ходить за грибами"],
+    ["kalal käima, kalal käia, käin kalal", "ходить на рыбалку"],
+    ["spor/t, -di, -ti", "спорт"],
+    ["lill, lille, lille", "цветок"],
+    ["kast/ma, -a, -an", "поливать"],
+    ["rohi/ma, -da, -n", "полоть"],
+    ["asi, asja, asja", "вещь"],
+    ["aja/kiri, -kirja, -kirja", "журнал"],
+    ["raamat, -u, -ut", "книга"],
+    ["kokka/ma, kokata, -n", "разг. готовить еду"],
+    ["tegele/ma, -da, -n", "заниматься"],
+    ["mängi/ma, -da, -n", "играть"],
+    ["kodu/töö, -töö, -tööd", "домашнее задание"],
+    ["aita/ma, aidata, -n", "помогать"],
+    ["raadio, -, -", "радио"],
+    ["surfa/ma, -ta, -n", "серфить"],
+    ["reisi/ma, -da, -n", "путешествовать"],
+    ["koer, koera, koera", "собака"],
+    ["jaluta/ma, -da, -n", "гулять"],
+    ["laul/ma, -da, -an", "петь"],
+    ["tantsi/ma, -da, -n", "танцевать"],
+    ["külas käima, külas käia, käin külas", "ходить в гости"],
+    ["pildista/ma, -da, -n", "фотографировать"],
+    ["käsitöö, -töö, -tööd", "рукоделие"],
+    ["päevita/ma, -da, -n", "загорать"],
+    ["muusika, -, -", "музыка"],
+    ["kino, -, -", "кино"],
+    ["lapse/hoidja, -hoidja, -hoidjat", "няня"],
+    ["teismeli/ne, -se, -st", "подросток"],
+     
+    ["eriti", "особенно"],
+    ["absoluutselt", "абсолютно"],
+    ["kuidas kunagi", "когда как"],
+    ["vihka/ma, vihata, -n", "ненавидеть"],
+    ["nii ja naa", "более или менее"],
+    ["lemmik, -u, -ut", "любимый"],
+    ["tegevus, -e, -", "деятельность"],
 
+    ["üleeile", "позавчера"],
+    ["eile", "вчера"],
+    ["ammu", "давно"],
+    ["enne", "раньше"],
+    ["hiljuti", "недавно"],
+    ["täna", "сегодня"],
+    ["nüüd", "теперь"],
+    ["praegu", "сейчас"],
+    ["äsja", "недавно"],
+    ["homme", "завтра"],
+    ["ülehomme", "послезавтра"],
+    ["mõnikord", "иногда"],
+    ["mitte kunagi", "никогда"],
+    ["pidevalt", "постоянно"],
+    ["kohe", "сразу"],
+    ["ükskord", "однажды"],
+    ["kaua", "долго"],
+    ["tihti", "часто"],
+    ["harva", "редко"],
+    ["vara", "рано"],
+    ["hilja", "поздно"],
+    ["hästi", "хорошо"],
+    ["halvasti", "плохо"],
+    ["kiiresti", "быстро"],
+    ["kergesti", "легко"],
+    ["ilusti / ilusasti", "красиво"],
+    ["eraldi", "отдельно"],
+    ["meeleldi", "с удовольствием"],
+    ["täpselt", "точно"],
+    ["rahulikult", "спокойно"],
+    ["juhuslikult", "случайно"],
+    ["mugavalt", "удобно"],
+    ["rõõmsalt", "весело"],
+    ["sõbralikult", "дружелюбно"],
+    ["lahti", "быть открытым"],
+    ["kohati", "местами, кое-где"],
+    ["jalgsi", "пешком"],
+    ["ruttu", "быстро"],
+
+    ["õnneks", "к счастью"],
+    ["kahjuks", "к сожалению"],
+    ["jälle", "опять, снова"],
+    ["tegelikult", "фактически"],
+    ["pigem", "скорее"],
+    ["eriti", "особенно"],
+    ["täiesti", "полностью, совершенно"],
+    ["väga", "очень"],
+    ["see-eest", "зато"],
+    ["lihtsalt", "просто"],
+    ["ainult", "только"],
+    ["kindlasti", "обязательно, наверняка"],
+    ["tõesti", "действительно"],
+    ["vaevalt", "навряд ли"],
+    ["ükskõik", "всё равно"],
+    ["mitte", "не, ни, нет"],
+    ["vist", "наверное"],
+    ["võib-olla", "возможно"],
+    ["isegi", "даже"],
+    ["loomulikult", "естественно"],
+    ["üldse", "вообще"],
+    ["muidugi", "конечно"],
+    ["igatahes", "во всяком случае"],
+    ["tõenäoliselt", "очевидно"],
+    ["üldiselt", "в целом"],
+    ["tingimata", "непременно"],
+    ["liiga", "слишком"],
+    ["vastupidi", "наоборот"],
+
+    ["hiljuti", "недавно"],
+    ["äsja", "недавно"],
+    ["pidevalt", "постоянно"],
+    ["ükskord", "однажды"],
+    ["hilja", "поздно"],
+    ["kiiresti", "быстро"],
+    ["kergesti", "легко"],
+    ["ilusti / ilusasti", "красиво"],
+    ["meeleldi", "с удовольствием"],
+    ["rahulikult", "спокойно"],
+    ["mugavalt", "удобно"],
+    ["rõõmsalt", "весело"],
+    ["sõbralikult", "дружно"],
+    ["lahti", "быть открытым"],
+    ["kohati", "местами, кое-где"],
+    ["purjus", "пьян"],
+    ["tegelikult", "фактически"],
+    ["vaevalt", "навряд ли"],
+    ["igatahes", "короче, одним словом"],
+    ["tõenäoliselt", "очевидно"],
+    ["üldiselt", "в целом"],
+    ["tingimata", "непременно"],
+    ["vastupidi", "наоборот"],
+
+    ["huvitav, -a, -at", "интересный"],
+    ["põnev, -a, -at", "захватывающий"],
+    ["mõnus, -a, -at", "приятный"],
+    ["lõõgastav, -a, -at", "расслабляющий"],
+    ["värskendav, -a, -at", "освежающий"],
+    ["vahva, vahva, vahvat", "забавный, славный"],
+    ["lõbus, -a, -at", "весёлый"],
+    ["lahe, -da, -dat", "классный"],
+    ["informatiiv/ne, -se, -set", "информативный"],
+    ["sportlik, -u, -ku", "спортивный"],
+    ["kasulik, -u, -ku", "полезный"],
+    ["tervislik, -u, -ku", "целебный, полезный, здоровый"],
+    ["tavali/ne, -se, -st", "обычный"],
+    ["iga/päevane, -päevase, -päevast", "ежедневный"],
+    ["igav, -a, -at", "скучный"],
+    ["tüütu, -, -", "нудный, надоедливый"],
+    ["väsitav, -a, -at", "утомительный"],
+    ["kahjulik, -u, -ku", "вредный"],
+    ["teleka/s, -, -t", "разг. телевизор"],
+
+    ["viitsi/ma, -da, -n", "иметь охоту, желание, расположение делать что-нибудь"],
+    ["lais/k, -a, -ka", "ленивый"],
+    ["veet/ma, -a, veedan", "проводить"],
+    ["vir/k, -ga, -ka", "усердный"],
+
+    ["probleem, probleemi, probleemi", "проблема"],
+    ["alusta/ma, -da, -n", "начинать"],
+    ["ausalt", "честно"],
+    ["ütlemi/ne, -se, -st", "высказывание"],
+    ["see selleks", "это об этом"],
+    ["ehitus, -e, -t", "строительство"],
+    ["ehitaja, -, -t", "строитель"],
+    ["ärka/ma, ärgata, -n", "просыпаться"],
+    ["kuigi", "хотя"],
+    ["hakkama saama, hakkama saada, saan hakkama", "справляться"],
+    ["aja raiskamine, aja raiskamise, aja raiskamist", "трата времени"],
+    ["hoopis", "вообще"],
+    ["mõist/ma, -a, -an", "понимать"],
+    ["pere/elu, -elu, -elu", "семейная жизнь"],
+    ["välja nägema, välja näha, näeb välja", "выглядеть"],
+    ["sarnane/ma, -da, -n", "походить, смахивать"],
+
+    ["tunne, tunde, -t", "чувство"],
+    ["maga/ma, -da, -n", "спать"],
+
+    ["tõeline, -se, -st", "настоящий"],
+    ["terve, -, -t", "целый"],
+    ["kaasaeg/ne, -se, -set", "современный"],
+
+     ["puhkus, -e, -t", "отдых"]
+        ];
+        
         let languageDirection = "etToRu"; // Направление: с эстонского на русский по умолчанию
         let currentQuestion = null;
         let correctAnswer = "";
 
         function displayQuestion() {
+            const wordList = document.getElementById('wordList').value;
+            const selectedWords = wordList === 'toLearn' ? wordsToLearn : words;
             const questionElement = document.querySelector('.question');
             const optionsContainer = document.querySelector('.options');
             const result = document.querySelector('.result');
 
             // Выбираем случайное слово
-            const randomIndex = Math.floor(Math.random() * words.length);
-            currentQuestion = words[randomIndex][0];
-            correctAnswer = words[randomIndex][1];
+            const randomIndex = Math.floor(Math.random() * selectedWords.length);
+            currentQuestion = selectedWords[randomIndex][0];
+            correctAnswer = selectedWords[randomIndex][1];
 
             // Перемешиваем варианты ответов
             let options = [];
             if (languageDirection === "etToRu") {
                 options.push(correctAnswer);
                 while (options.length < 4) {
-                    const randomOption = words[Math.floor(Math.random() * words.length)][1];
+                    const randomOption = selectedWords[Math.floor(Math.random() * selectedWords.length)][1];
                     if (!options.includes(randomOption)) {
                         options.push(randomOption);
                     }
@@ -2293,7 +2487,7 @@
             } else {
                 options.push(currentQuestion);
                 while (options.length < 4) {
-                    const randomOption = words[Math.floor(Math.random() * words.length)][0];
+                    const randomOption = selectedWords[Math.floor(Math.random() * selectedWords.length)][0];
                     if (!options.includes(randomOption)) {
                         options.push(randomOption);
                     }
@@ -2349,6 +2543,7 @@
             languageDirection = document.getElementById('language').value;
             displayQuestion();
         }
+
         // Начальная инициализация
         displayQuestion();
     </script>
