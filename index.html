@@ -80,7 +80,7 @@
     <button id="nextQuestionBtn" onclick="displayQuestion()">Следующий вопрос</button>
 
     <!-- Элемент для отображения изображения -->
-    <img id="wordImage" src="./dragon.png" alt="Изображение" width="500" style="display: block; margin: 20px auto;">
+    <img id="wordImage" src="dragon.png" alt="Изображение" width="500" style="display: block; margin: 20px auto;">
 
     <script>
         const words = [
@@ -2553,13 +2553,13 @@
     const wordImage = document.getElementById('wordImage');
 
     if (wordList === 'all') {
-        wordImage.src = './dragon.png'; // Укажите путь к изображению для "Все слова"
+        wordImage.src = 'dragon.png'; // Укажите путь к изображению для "Все слова"
     } else if (wordList === 'toLearn3') {
-        wordImage.src = './seen.png'; // Укажите путь к изображению для "Слова Глава 3"
+        wordImage.src = 'seen.png'; // Укажите путь к изображению для "Слова Глава 3"
     } else if (wordList === 'toLearn5') {
-        wordImage.src = './selg.png'; // Укажите путь к изображению для "Слова Глава 5"
+        wordImage.src = 'selg.png'; // Укажите путь к изображению для "Слова Глава 5"
     } else {
-        wordImage.src = './dragon.png'; // Укажите путь к изображению по умолчанию
+        wordImage.src = 'dragon.png'; // Укажите путь к изображению по умолчанию
     }
 }
 
